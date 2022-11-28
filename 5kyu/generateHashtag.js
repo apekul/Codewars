@@ -25,6 +25,7 @@ function generateHashtag(str) {
           .join("")
     : false;
 }
+
 console.log(generateHashtag(""));
 console.log(generateHashtag(" "));
 console.log(generateHashtag("Do We have A Hashtag"));
