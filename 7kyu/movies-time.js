@@ -23,66 +23,44 @@
 
 // NOTE 2: Midnight will be represented as (0, 0) or 0:00 in this kata, instead of 24:00.
 
+console.log(movie_times(17, 21, 178));
+console.log(movie_times(13, 23, 60));
+console.log(movie_times(16, 3, 75));
+console.log(movie_times(17, 24, 155));
+console.log(movie_times(17, 24, 99));
+
+function movie_times(open, close, length) {
+  let arr = [];
+  if (close < open) close += 24;
+  for (let time = open * 60; time + length <= close * 60; time += length + 15) {
+    arr.push([Math.floor(time / 60) % 24, time % 60]);
+  }
+  return arr;
+}
+
 // function movie_times(open, close, length) {
 //   let arr = [];
-//   let min = 0;
-//   for (let i = open; i < close - 2; i++) {
-//     let hour = i * 60 + min;
-//     let rest = hour;
-//     arr.push([Math.floor(hour / 60), rest % 60]);
-//     min += 15;
+//   if (close < open) close += 24;
+//   for (let time = open * 60; time + length <= close * 60; time += length + 15) {
+//     arr.push([Math.floor(time / 60) % 24, time % 60]);
 //   }
 //   return arr;
 // }
 
+// This is not solution(Does not pass some random tests, also some logic mistakes)
 // function movie_times(open, close, length) {
 //   let arr = [];
 //   let min = 0;
-//   // if (close <= open) close += 24;
-//   for (let i = open; i < close - 2 ; i++) {
-//     let time = i*length
-//     arr.push([Math.floor((time+min)/60), (time+min)%60]);
-//     min+=15
+//   if (close < open) close += 24;
+//   let range = close - open;
+
+//   for (let i = 1; i < range; i++) {
+//     let num = Math.floor((open * 60 + min) / 60);
+
+//     if (((open * 60 + min) / 60) < close - length / 60) {
+//       arr.push([num, min % 60]);
+//       min += length + 15;
+//     }
 //   }
-//   return arr
+//   return arr.map((v) => (v[0] >= 24 ? [v[0] - 24, v[1]] : [v[0], v[1]]));
 // }
-
-function movie_times(open, close, length) {
-  let arr = [];
-  let min = 0;
-  if (close < open) close += 24;
-  let range = close - open;
-
-  for (let i = 1; i < range - 1; i++) {
-    let num = Math.floor((open * 60 + min) / 60);
-
-    if (num >= close - 1) break;
-
-    arr.push([num, Math.ceil(min % 60)]);
-    min += length + 15;
-  }
-  return arr.map((v) => (v[0] >= 24 ? [v[0] - 24, v[1]] : [v[0], v[1]]));
-}
-
-// (Math.ceil(900.25) - 900.25) * 60
-// [Math.floor(30 / 60), 30 % 60]
-// 25 / 100 * 60
-console.log(movie_times(13, 23, 60));
-console.log(movie_times(16, 3, 75));
-console.log(movie_times(15, 3, 75));
-
-// [ [ 16, 0 ],
-//   [ 17, 30 ],
-//   [ 19, 0 ],
-//   [ 20, 30 ],
-//   [ 22, 0 ],
-//   [ 23, 30 ],
-//   [ 0, 0 ] ]
-
-// [ [ 16, 0 ],
-//   [ 17, 30 ],
-//   [ 19, 0 ],
-//   [ 20, 30 ],
-//   [ 22, 0 ],
-//   [ 23, 30 ],
-//   [ 1, 0 ] ]
