@@ -38,15 +38,6 @@ function movie_times(open, close, length) {
   return arr;
 }
 
-// function movie_times(open, close, length) {
-//   let arr = [];
-//   if (close < open) close += 24;
-//   for (let time = open * 60; time + length <= close * 60; time += length + 15) {
-//     arr.push([Math.floor(time / 60) % 24, time % 60]);
-//   }
-//   return arr;
-// }
-
 // This is not solution(Does not pass some random tests, also some logic mistakes)
 // function movie_times(open, close, length) {
 //   let arr = [];
